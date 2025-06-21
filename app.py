@@ -4,7 +4,7 @@ from langchain.schema import HumanMessage
 import os
 
 # ✅ Load from Streamlit Secrets — these are OpenRouter values
-os.environ["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"] = st.secrets["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"]
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 os.environ["OPENAI_API_BASE"] = st.secrets["OPENAI_API_BASE"]
 
 # ✅ Agentic LLM model from OpenRouter
