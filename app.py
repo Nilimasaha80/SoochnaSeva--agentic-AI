@@ -5,9 +5,11 @@ import os
 
 # ✅ Read secrets directly (no need to write to os.environ)
 chat = ChatOpenAI(
-    model_name="anthropic/claude-3-sonnet-20240229",  # ✅ working, multilingual
+    model_name="anthropic/claude-3-sonnet-20240229",
     openai_api_key=st.secrets["OPENAI_API_KEY"],
-    openai_api_base=st.secrets["OPENAI_API_BASE"]
+    openai_api_base=st.secrets["OPENAI_API_BASE"],
+    max_tokens=1000  # ✅ Reduce to fit within free credit limits
+
 
 )
 
