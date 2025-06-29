@@ -9,8 +9,9 @@ os.environ["OPENAI_API_BASE"] = st.secrets["OPENAI_API_BASE"]
 
 # ✅ Agentic LLM model from OpenRouter
 chat = ChatOpenAI(
-    model_name="openai/gpt-3.5-turbo",  # Or try "mistralai/mistral-7b-instruct"
-    temperature=0.7
+    model_name="openai/gpt-3.5-turbo",  # ✅ Make sure model name matches OpenRouter's docs
+    openai_api_key=os.getenv("OPENROUTER_API_KEY"),  # ✅ Use env or Streamlit secrets
+    openai_api_base="https://openrouter.ai/api/v1",  # ✅ Key line for OpenRouter
 )
 
 # ✅ Streamlit Chatbot UI
