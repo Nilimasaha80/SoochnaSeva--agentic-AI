@@ -5,9 +5,10 @@ import os
 
 # ✅ Read secrets directly (no need to write to os.environ)
 chat = ChatOpenAI(
-    model_name="openai/gpt-3.5-turbo",  # ✅ must include 'openai/' for OpenRouter
-    openai_api_key=st.secrets["OPENAI_API_KEY"],     # ✅ securely stored in Streamlit Secrets
-    openai_api_base=st.secrets["OPENAI_API_BASE"]    # ✅ usually 'https://openrouter.ai/api/v1'
+    model_name="anthropic/claude-3-sonnet-20240229",  # ✅ working, multilingual
+    openai_api_key=st.secrets["OPENAI_API_KEY"],
+    openai_api_base=st.secrets["OPENAI_API_BASE"]
+
 )
 
 # ✅ Streamlit UI
