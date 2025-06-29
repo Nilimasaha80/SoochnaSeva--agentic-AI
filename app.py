@@ -3,23 +3,23 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
 import os
 
-# ✅ Load from Streamlit Secrets — these are OpenRouter values
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
-os.environ["OPENAI_API_BASE"] = st.secrets["OPENAI_API_BASE"]
-
-# ✅ Agentic LLM model from OpenRouter
+# ✅ Read secrets directly (no need to write to os.environ)
 chat = ChatOpenAI(
-    model_name="openai/gpt-3.5-turbo",  # ✅ Make sure model name matches OpenRouter's docs
-    openai_api_key=os.getenv("OPENROUTER_API_KEY"),  # ✅ Use env or Streamlit secrets
-    openai_api_base="https://openrouter.ai/api/v1",  # ✅ Key line for OpenRouter
+    model_name="openai/gpt-3.5-turbo",  # ✅ must include 'openai/' for OpenRouter
+    openai_api_key=st.secrets["OPENAI_API_KEY"],     # ✅ securely stored in Streamlit Secrets
+    openai_api_base=st.secrets["OPENAI_API_BASE"]    # ✅ usually 'https://openrouter.ai/api/v1'
 )
 
-# ✅ Streamlit Chatbot UI
+# ✅ Streamlit UI
 st.title("🧠 SoochnaSeva – Rural AI Chatbot 🇮🇳")
 st.write("यह एआई चैटबॉट ग्रामीण उपयोगकर्ताओं को हिंदी में सरकारी योजनाओं और खेती से संबंधित सवालों का जवाब देता है।")
 
 query = st.text_input("❓ अपना सवाल लिखें:")
 
-if st.button("📩 पूछें"):
-    response = chat([HumanMessage(content=query)])
-    st.success(f"📌 जवाब: {response.content}")
+if st.button("📩 पूछें") and query:
+    try:
+        response = chat([HumanMessage(content=query)])
+        st.success(f"📌 जवाब: {response.content}")
+    except Exception as e:
+        st.error(f"❌ एरर: {str(e)}")
+
